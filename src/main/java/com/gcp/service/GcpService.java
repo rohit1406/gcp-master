@@ -1,17 +1,15 @@
 package com.gcp.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gcp.dto.BucketNameDto;
 import com.gcp.exceptions.GcpInternalFailureException;
-import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.Storage.BucketListOption;
-import com.google.cloud.storage.StorageOptions;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class GcpService {
 	@Autowired
 	private DataBucketService dataBucketService;
@@ -19,10 +17,11 @@ public class GcpService {
 	/**
 	 * Returns the list of available buckets
 	 * */
-	public List<String> getBucketList() {
+	public BucketNameDto getBucketList() {
 		try {
-			return dataBucketService.getBucketList();
+			return BucketNameDto.builder().bucketNames(dataBucketService.getBucketList()).build();
 		} catch(Exception ex) {
+			log.error("Exception occured while getting bucket list", ex);
 			throw new GcpInternalFailureException(ex.getMessage());
 		}
 	}
