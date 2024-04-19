@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.gcp.dto.BucketNameDto;
 import com.gcp.exceptions.GcpInternalFailureException;
-import com.mysql.cj.xdevapi.PreparableStatement;
 
 import lombok.extern.slf4j.Slf4j;
 

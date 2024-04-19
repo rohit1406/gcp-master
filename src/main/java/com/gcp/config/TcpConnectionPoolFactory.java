@@ -33,7 +33,7 @@ public class TcpConnectionPoolFactory extends ConnectionPoolFactory {
 	@Bean
 	public DataSource createConnectionPool() {
 		HikariConfig config = new HikariConfig();
-		config.setJdbcUrl(String.format("jdbc:mysql://%s:%s/%s", INSTANCE_HOST, DB_PORT, DB_NAME));
+		config.setJdbcUrl(String.format("jdbc:mysql://%s/%s", INSTANCE_HOST, DB_NAME));
 		//config.setJdbcUrl(String.format("jdbc:mysql:///%s", DB_NAME));
 		config.setUsername(DB_USER);
 		config.setPassword(DB_PASS);
