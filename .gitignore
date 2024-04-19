@@ -65,6 +65,7 @@ info/
 *.iws
 *.iml
 *.ipr
+*.gz
 
 ### NetBeans ###
 /nbproject/private/

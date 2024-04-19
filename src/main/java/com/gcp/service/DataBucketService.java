@@ -25,13 +25,13 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class DataBucketService {
-	@Value("${gcp.config.file:gcp-account-config.json}")
+	@Value("${gcp.config.file}")
 	private String gcpAccountConfigFile;
 	
-	@Value("${gcp.project.id:project-job-420017}")
+	@Value("${gcp.project.id}")
 	private String gcpProjectId;
 	
-	@Value("${gcp.bucket.it:rsm-file-storage}")
+	@Value("${gcp.bucket.id}")
 	private String gcpBucketId;
 	
 	@Value("${gcp.directory.name:}")
