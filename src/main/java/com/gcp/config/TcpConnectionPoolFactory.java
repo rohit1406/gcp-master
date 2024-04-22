@@ -25,11 +25,11 @@ public class TcpConnectionPoolFactory extends ConnectionPoolFactory {
 	private String INSTANCE_HOST;
 	@Value("${DB_PORT}")
 	private String DB_PORT;
-	@Value("${TRUST_CERT_KEYSTORE_PATH}")
+	@Value("${TRUST_CERT_KEYSTORE_PATH:}")
 	private String TRUST_CERT_KEYSTORE_PATH;
 	@Value("${TRUST_CERT_KEYSTORE_PASSWD}")
 	private String TRUST_CERT_KEYSTORE_PASSWD;
-	@Value("${CLIENT_CERT_KEYSTORE_PATH}")
+	@Value("${CLIENT_CERT_KEYSTORE_PATH:}")
 	private String CLIENT_CERT_KEYSTORE_PATH;
 	@Value("${CLIENT_CERT_KEYSTORE_PASSWD}")
 	private String CLIENT_CERT_KEYSTORE_PASSWD;
