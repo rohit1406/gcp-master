@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.ResourceLoader;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -34,6 +33,8 @@ public class TcpConnectionPoolFactory extends ConnectionPoolFactory {
 	private String CLIENT_CERT_KEYSTORE_PATH;
 	@Value("${CLIENT_CERT_KEYSTORE_PASSWD}")
 	private String CLIENT_CERT_KEYSTORE_PASSWD;
+	@Value("${gcp.ssl.enabled:false}")
+	private boolean sslEnabled;
 	@Autowired
 	private ResourceLoader resourceLoader;
 	
@@ -46,12 +47,12 @@ public class TcpConnectionPoolFactory extends ConnectionPoolFactory {
 		config.setPassword(DB_PASS);
 		//config.addDataSourceProperty("socketFactory", "com.google.cloud.sql.mysql.SocketFactory");
 	    //config.addDataSourceProperty("cloudSqlInstance", "cl-mysql");
-		if (CLIENT_CERT_KEYSTORE_PATH != null && TRUST_CERT_KEYSTORE_PATH != null) {
+		if (sslEnabled && CLIENT_CERT_KEYSTORE_PATH != null && TRUST_CERT_KEYSTORE_PATH != null) {
 		      config.addDataSourceProperty("trustCertificateKeyStoreUrl",
-		          String.format("file:%s", resourceLoader.getResource("classpath:"+TRUST_CERT_KEYSTORE_PATH).getFile()));
+		          String.format("file:%s", resourceLoader.getResource(TRUST_CERT_KEYSTORE_PATH).getFile()));
 		      config.addDataSourceProperty("trustCertificateKeyStorePassword", TRUST_CERT_KEYSTORE_PASSWD);
 		      config.addDataSourceProperty("clientCertificateKeyStoreUrl",
-		          String.format("file:%s", resourceLoader.getResource("classpath:"+CLIENT_CERT_KEYSTORE_PATH).getFile()));
+		          String.format("file:%s", resourceLoader.getResource(CLIENT_CERT_KEYSTORE_PATH).getFile()));
 		      config.addDataSourceProperty("clientCertificateKeyStorePassword",
 		          CLIENT_CERT_KEYSTORE_PASSWD);
 		    }
