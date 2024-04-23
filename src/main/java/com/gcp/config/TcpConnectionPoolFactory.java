@@ -21,10 +21,8 @@ public class TcpConnectionPoolFactory extends ConnectionPoolFactory {
 	private String DB_PASS;
 	@Value("${DB_NAME}")
 	private String DB_NAME;
-	@Value("${INSTANCE_HOST}")
-	private String INSTANCE_HOST;
-	@Value("${DB_PORT}")
-	private String DB_PORT;
+	@Value("${JDBC_URL}")
+	private String JDBC_URL;
 	@Value("${TRUST_CERT_KEYSTORE_PATH:}")
 	private String TRUST_CERT_KEYSTORE_PATH;
 	@Value("${TRUST_CERT_KEYSTORE_PASSWD}")
@@ -41,7 +39,7 @@ public class TcpConnectionPoolFactory extends ConnectionPoolFactory {
 	@Bean
 	public DataSource createConnectionPool() throws IOException {
 		HikariConfig config = new HikariConfig();
-		config.setJdbcUrl(String.format("jdbc:mysql://%s/%s", INSTANCE_HOST, DB_NAME));
+		config.setJdbcUrl(JDBC_URL);
 		//config.setJdbcUrl(String.format("jdbc:mysql:///%s", DB_NAME));
 		config.setUsername(DB_USER);
 		config.setPassword(DB_PASS);
